@@ -1,0 +1,39 @@
+<%= form_with model: @employee, local: true do |form| %>
+  <p>
+    <%= form.label :employee_name %><br>
+    <%= form.text_field :employee_name %>
+  </p>
+ 
+  <p>
+    <%= form.label :phone_number %><br>
+    <%= form.text_field :phone_number %>
+  </p>
+
+<h3>Images are:</h3>
+<% @employee.avatars.each do |avatar| %>
+ <%= image_tag avatar.thumb.url ? avatar.thumb.url : ''  %> 
+ <%end %> 
+  <p>
+    <%= form.label :image %><br>
+    <%= form.file_field :image, multiple: true %>
+  </p>
+ 
+  <p>
+    <%= form.submit %>
+  </p>
+
+   <% if @employee.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@employee.errors.count, "error") %> prohibited
+        this employee from being saved:
+      </h2>
+      <ul>
+        <% @employee.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<%= link_to 'back' ,employees_path %>
+<% end %>

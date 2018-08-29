@@ -1,0 +1,45 @@
+<p>
+  <strong>id:</strong>
+  <%= @employee.id %>
+</p>
+ 
+<p>
+  <strong>name:</strong>
+  <%= @employee.employee_name %>
+</p>
+
+<p>
+  <strong>phone_number:</strong>
+  <%= @employee.phone_number %>
+</p>
+
+<p>
+  <strong>image:</strong>
+  <% @employee.avatars.each do |avatar| %>
+  <%= image_tag avatar.thumb.url ? avatar.thumb.url : '' %>
+  <% end %>
+</p>
+
+<p>
+  <strong>salary:</strong>
+  <%= @employee.salary ? @employee.salary.salary : 'no record' %>            
+</p>
+
+<p>
+  <strong>packages:</strong>
+  <%  if  @employee.packages != nil    %>
+  <% @employee.packages.each do|package| %>
+  <%=  package.package_name  %>  
+  <% end %> 
+  <% else %>
+  not exist    
+  <% end %>     
+</p>
+
+<!-- here @employee.salary result is get record from salary table where employee_id = @employee.id
+means jis employee k record show kr rhe hai ex. usiki id -8 hai to salary table mai yha emp_id 8 hai wo
+record aa jyga then usme .salary means salary column ki value
+ -->
+
+<%= link_to 'back', employees_path %>
+

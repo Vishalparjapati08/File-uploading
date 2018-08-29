@@ -1,0 +1,48 @@
+
+
+
+<table>
+<tr>
+	<th>
+		id
+	</th>
+          <th>
+		employee_name
+	</th>
+	<th>
+		phone_number
+	</th>
+         <th>
+		images
+	</th>
+	<th>
+    Actions
+    </th>
+</tr>
+<% @employees.each do |employee| %>
+<tr>
+	<td>
+	<%=	employee.id %>
+	</td>
+	<td>
+	<%=	employee.employee_name %>
+	</td>
+	<td>
+	<%=	employee.phone_number %>
+	</td>
+	<td>
+    <% employee.avatars.each do |avatar| %>
+	<%= image_tag avatar.thumb.url ? avatar.thumb.url : ''  %>
+	<% end %>
+	</td>
+	<td>
+		<%= link_to 'delete', employee_path(employee),method: :delete,data: { confirm: 'Are you sure?' }  %>
+		<%= link_to 'edit' ,edit_employee_path(employee) %>
+		<%= link_to 'new',new_employee_path %>
+		<%= link_to 'show', employee_path(employee) %>
+	</td>
+</tr>
+<% end %>
+</table>
+
+<%= will_paginate @employees %>

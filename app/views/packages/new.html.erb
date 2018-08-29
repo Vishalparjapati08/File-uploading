@@ -1,0 +1,28 @@
+<%= form_with scope: :package,url: packages_path,local: true do |form| %>
+<%= form.label :package_name %>
+<%= form.select :package_name, ['small','medium','large','extra-large'] %><br>
+
+<%= form.label :package_price %>
+<%= form.text_field :package_price %><br>			
+
+<%=  form.submit :submit %>
+
+
+  <% if @package.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@package.errors.count, "error") %> prohibited
+        this package from being saved:
+      </h2>
+      <ul>
+        <% @package.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+<%  end %>
+
